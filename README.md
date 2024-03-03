@@ -52,7 +52,7 @@ Flutter Career UI is a cross-platform application designed for Android and iOS t
 
 2. Clone the repository:
    ```bash
-   git clone <https://github.com/EnthusiasticXcoder/Flutter-Career-UI.git>
+   git clone https://github.com/EnthusiasticXcoder/Flutter-Career-UI.git
    ```
 
 3. Change to the project directory:
