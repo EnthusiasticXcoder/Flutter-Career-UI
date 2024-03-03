@@ -80,7 +80,7 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 5. Submit a pull request to the main repository.
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for more details.
 
 ## Acknowledgements
 - [Flutter](https://flutter.dev/) - UI toolkit for building beautiful applications
