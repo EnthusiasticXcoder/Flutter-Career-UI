@@ -2,25 +2,26 @@ import 'package:flutter/material.dart' show immutable;
 
 @immutable
 abstract class MainState {
-  const MainState();
+  final bool isLoading;
+  const MainState({required this.isLoading});
 }
 
 class MainStateUninitialised extends MainState {
-  const MainStateUninitialised();
+  const MainStateUninitialised({required super.isLoading});
 }
 
 class MainStateLoggedOut extends MainState {
-  const MainStateLoggedOut();
+  const MainStateLoggedOut({required super.isLoading});
 }
 
 class MainStateLogIn extends MainState {
-  const MainStateLogIn();
+  const MainStateLogIn({required super.isLoading});
 }
 
 class MainStateRegister extends MainState {
-  const MainStateRegister();
+  const MainStateRegister({required super.isLoading});
 }
 
 class MainStateLoggedIn extends MainState {
-  const MainStateLoggedIn();
+  const MainStateLoggedIn({required super.isLoading});
 }

@@ -17,12 +17,12 @@ class RegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (canPop) {
         context.read<MainBloc>().add(
               const MainEventLogout(),
             );
-        return Future.value(false);
       },
       child: PaintedScaffold(
           title: 'Register User',

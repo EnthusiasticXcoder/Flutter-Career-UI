@@ -10,7 +10,7 @@ class ContantItem {
 
   ContantItem.fromMap(dynamic map)
       : tag = map[tagField],
-        contant = map[contantField],
+        contant = map['content'],
         link = map[linkField];
 }
 

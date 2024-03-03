@@ -5,12 +5,15 @@ import 'blog_event.dart';
 import 'blog_state.dart';
 
 class BlogBloc extends Bloc<BlogEvent, BlogState> {
-  BlogBloc(APIDataProvider provider) : super(const BlogStateInitial()) {
+  BlogBloc(APIDataProvider provider)
+      : super(const BlogStateUninitialised(isLoading: true)) {
     on<BlogEventInitialise>((event, emit) async {
       try {
+        emit(const BlogStateUninitialised(isLoading: true));
         final career = await provider.getCareerlist();
         final blog = await provider.getHomeBlog();
         emit(BlogStateInitial(
+          isLoading: false,
           user: provider.currentuser,
           carrierlist: career,
           bloglist: blog,
@@ -22,9 +25,9 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
 
     on<BlogEventCatagoryBlogList>((event, emit) async {
       try {
+        emit(const BlogStateUninitialised(isLoading: true));
         final bloglist = await provider.getBloglist(event.url);
-
-        emit(BlogStateBlogList(bloglist));
+        emit(BlogStateBlogList(blogList: bloglist, isLoading: false));
       } on APICallException {
         emit(state); // error message
       }
@@ -32,8 +35,11 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
 
     on<BlogEventBlogContant>((event, emit) async {
       try {
+        var currentstate = state;
+        emit(const BlogStateUninitialised(isLoading: true));
         final contant = await provider.getBlogcontant(event.url);
-        emit(BlogStateContantBlog(contant, state));
+        emit(BlogStateContantBlog(
+            isLoading: false, blogcontant: contant, state: currentstate));
       } on APICallException {
         emit(state); // error message
       }

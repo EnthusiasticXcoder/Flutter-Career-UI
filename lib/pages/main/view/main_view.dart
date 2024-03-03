@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercareerui/bloc/bloc.dart';
+import 'package:fluttercareerui/helpers/loading_screen.dart';
+import 'package:fluttercareerui/helpers/shaders/gradient_shader.dart';
+import 'package:fluttercareerui/models/models.dart';
 import 'package:fluttercareerui/pages/blog/view/view.dart';
 import 'package:fluttercareerui/pages/main/widgets/widgets.dart';
 
@@ -13,6 +16,7 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView>
     with SingleTickerProviderStateMixin {
   bool isSideBarOpen = false;
+  bool canpop = false;
 
   late AnimationController _animationController;
   late Animation<double> animation;
@@ -43,15 +47,17 @@ class _MainViewState extends State<MainView>
   @override
   Widget build(BuildContext context) {
     double sidebarwidth = MediaQuery.sizeOf(context).width * 0.75;
-    return WillPopScope(
-      onWillPop: () {
+    return PopScope(
+      canPop: canpop,
+      onPopInvoked: (didPop) {
         if (isSideBarOpen) {
           _animationController.reverse();
           isSideBarOpen = !isSideBarOpen;
-          return Future.value(false);
+          canpop = false;
         } else {
-          return Future.value(true);
+          canpop = true;
         }
+        setState(() {});
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -70,7 +76,12 @@ class _MainViewState extends State<MainView>
                 } else if (state is BlogStateInitial) {
                   return HomeView(bloglist: state.bloglist);
                 } else {
-                  return const Scaffold();
+                  return Scaffold(
+                    body: CustomPaint(
+                      painter: GradientPainter(),
+                      child: LoadingScreen.build(),
+                    ),
+                  );
                 }
               },
             ),
@@ -86,11 +97,15 @@ class _MainViewState extends State<MainView>
               child: BlocBuilder<BlogBloc, BlogState>(
                 buildWhen: (previous, current) => current is BlogStateInitial,
                 builder: (context, state) {
-                  state = state as BlogStateInitial;
-
+                  Iterable<MenuItem>? carrierlist;
+                  APIUser? user;
+                  if (state is BlogStateInitial) {
+                    user = state.user;
+                    carrierlist = state.carrierlist;
+                  }
                   return DrawerMenu(
-                    careerlist: state.carrierlist,
-                    user: state.user,
+                    careerlist: carrierlist,
+                    user: user,
                     onPress: () {
                       if (_animationController.value == 0) {
                         _animationController.forward();

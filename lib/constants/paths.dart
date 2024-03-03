@@ -1,5 +1,4 @@
-
-const baseURL = '192.168.29.230:8000';
+const baseURL = '';
 const registerPath = 'user/register';
 const loginPath = 'user/login';
 const userPath = 'user';

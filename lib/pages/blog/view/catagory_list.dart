@@ -11,12 +11,12 @@ class CatagoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
         context.read<BlogBloc>().add(
               const BlogEventInitialise(),
             );
-        return Future.value(false);
       },
       child: Scaffold(
         appBar: PreferredSize(

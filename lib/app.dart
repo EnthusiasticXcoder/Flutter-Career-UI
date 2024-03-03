@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercareerui/helpers/loading_screen.dart';
+import 'package:fluttercareerui/helpers/shaders/gradient_shader.dart';
 
 import 'services/django_api_service.dart';
 
@@ -14,9 +16,19 @@ class HomePage extends StatelessWidget {
     context.read<MainBloc>().add(
           const MainEventInitialise(),
         );
-    return BlocBuilder<MainBloc, MainState>(
+    return BlocConsumer<MainBloc, MainState>(
+      listener: (context, state) {
+        if (state.isLoading) LoadingScreen.showLoadingScreen(context);
+        LoadingScreen.hideLoadingScreen(context);
+      },
       builder: (context, state) {
         switch (state.runtimeType) {
+          case MainStateUninitialised:
+            return Scaffold(
+              body: CustomPaint(
+                painter: GradientPainter(),
+              ),
+            );
           case MainStateLogIn:
             return LogInView();
           case MainStateRegister:
@@ -29,7 +41,11 @@ class HomePage extends StatelessWidget {
               child: const MainView(),
             );
           default:
-            return Container();
+            return Scaffold(
+              body: CustomPaint(
+                painter: GradientPainter(),
+              ),
+            );
         }
       },
     );

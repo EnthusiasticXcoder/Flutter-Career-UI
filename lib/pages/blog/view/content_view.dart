@@ -17,12 +17,12 @@ class BlogContantView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
         context.read<BlogBloc>().add(
               BlogEventPreviousState(state),
             );
-        return Future.value(false);
       },
       child: Scaffold(
         appBar: PreferredSize(
