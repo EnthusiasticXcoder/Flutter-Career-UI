@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:fluttercareerui/bloc/bloc.dart';
 import 'package:fluttercareerui/constants/constants.dart';
-
 
 class BulletList extends StatelessWidget {
   const BulletList({
@@ -25,10 +23,10 @@ class BulletList extends StatelessWidget {
                 shape: const StarBorder(),
               ),
               onPressed: () {
-                final String? link = line['link'];
+                final String? link = line[AppConstants.linkField];
 
                 if (link != null && !link.startsWith('#')) {
-                  if (link.contains('category')) {
+                  if (link.contains(AppConstants.catagoryField)) {
                     context.read<BlogBloc>().add(
                           BlogEventCatagoryBlogList(link),
                         );
@@ -44,9 +42,9 @@ class BulletList extends StatelessWidget {
                 size: 8,
               ),
               label: Text(
-                line['text'],
-                style: tagStyles['p']?.copyWith(
-                    fontWeight: (line['link'] != null)
+                line[AppConstants.text],
+                style: tagStyles[Tags.p]?.copyWith(
+                    fontWeight: (line[AppConstants.linkField] != null)
                         ? FontWeight.w900
                         : FontWeight.normal),
               ),

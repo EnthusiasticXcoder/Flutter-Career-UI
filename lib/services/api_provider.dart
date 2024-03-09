@@ -1,4 +1,3 @@
-
 import 'package:fluttercareerui/models/models.dart';
 
 abstract class APIDataProvider {

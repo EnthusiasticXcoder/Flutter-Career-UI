@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercareerui/bloc/bloc.dart';
+import 'package:fluttercareerui/constants/constants.dart';
 import 'package:fluttercareerui/pages/auth/widgets/widget.dart';
-
 
 class WelcomeView extends StatelessWidget {
   const WelcomeView({super.key});
@@ -14,10 +14,10 @@ class WelcomeView extends StatelessWidget {
         children: [
           // Welcome Label text
           const Text(
-            'Welcome To Career Piolet',
+            AppLanguage.welcomeMessage,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
           ),
-          const Text('Make Your Way To Career Blogs'),
+          const Text(AppLanguage.appTagLine),
           // margin
           SizedBox(height: MediaQuery.of(context).size.height * 0.05),
           // sign in button for navigating to signin page
@@ -35,7 +35,7 @@ class WelcomeView extends StatelessWidget {
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0))),
-              child: const Text('Log in')),
+              child: const Text(AppLanguage.logIn)),
 
           // margin
           SizedBox(height: MediaQuery.of(context).size.height * 0.01),
@@ -53,7 +53,7 @@ class WelcomeView extends StatelessWidget {
                       MediaQuery.of(context).size.height * 0.055),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0))),
-              child: const Text('Register User')),
+              child: const Text(AppLanguage.registerUser)),
         ],
       ),
     );

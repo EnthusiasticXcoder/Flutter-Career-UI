@@ -1,4 +1,3 @@
-
 abstract class APICallException implements Exception {}
 
 class GenericAPICallException implements APICallException {}

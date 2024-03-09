@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:fluttercareerui/bloc/bloc.dart';
 import 'package:fluttercareerui/models/models.dart';
 import 'package:fluttercareerui/pages/main/widgets/widgets.dart';
-
 
 class DrawerMenu extends StatelessWidget {
   final Iterable<MenuItem>? careerlist;

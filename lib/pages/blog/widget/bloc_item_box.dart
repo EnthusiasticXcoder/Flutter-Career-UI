@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:fluttercareerui/constants/constants.dart';
 import 'package:fluttercareerui/models/models.dart';
 
 class BlocListBox extends StatelessWidget {
@@ -70,7 +70,7 @@ class BlocListBox extends StatelessWidget {
                     fontWeight: FontWeight.normal),
               ),
               TextSpan(
-                text: '  Read More',
+                text: AppLanguage.readMore,
                 style: TextStyle(
                   color: Colors.lightBlue.shade300,
                   fontSize: 12,

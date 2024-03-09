@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercareerui/constants/constants.dart';
 
 typedef ValueCallback = void Function(String? value);
 
@@ -29,8 +30,9 @@ class TextInputField extends StatelessWidget {
       controller: controller,
       obscureText: obscureText,
       onChanged: onChange,
-      validator: (value) =>
-          (value != null && value.isNotEmpty) ? null : 'Required Field',
+      validator: (value) => (value != null && value.isNotEmpty)
+          ? null
+          : AppLanguage.requiredField,
       onTapOutside: (event) {
         FocusScope.of(context).unfocus();
       },

@@ -1,4 +1,4 @@
-// export for services 
+// export for services
 
 export 'api_provider.dart';
 export 'api_exceptions.dart';

@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:fluttercareerui/bloc/bloc.dart';
 import 'package:fluttercareerui/models/blog_model.dart';
-
 
 class NestedList extends StatelessWidget {
   final MenuItem careeritem;

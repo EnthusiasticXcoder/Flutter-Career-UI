@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercareerui/constants/constants.dart';
 import 'package:fluttercareerui/helpers/shaders/gradient_shader.dart';
 import 'package:fluttercareerui/models/blog_model.dart';
 import 'package:fluttercareerui/pages/blog/widget/page_blog_box.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({
-    super.key,
-    required this.bloglist,
-  });
+  const HomeView({super.key, required this.bloglist});
 
   final Iterable<BlogList>? bloglist;
 
@@ -23,7 +21,7 @@ class HomeView extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             Text(
-              'Home',
+              AppLanguage.home,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 34,

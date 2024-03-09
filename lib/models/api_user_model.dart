@@ -19,15 +19,15 @@ class APIUser {
 
   APIUser.fromjson(Map<String, Object?> map, String key)
       : token = key,
-        email = map[emailField] as String,
-        userName = map[userNameField] as String,
-        firstName = map[firstNameField] as String,
-        lastName = map[lastNameField] as String;
+        email = map[AppConstants.emailField] as String,
+        userName = map[AppConstants.userNameField] as String,
+        firstName = map[AppConstants.firstNameField] as String,
+        lastName = map[AppConstants.lastNameField] as String;
 
   Map<String, Object?> tojson() => {
-        emailField: email,
-        userNameField: userName,
-        firstNameField: firstName,
-        lastNameField: lastName,
+        AppConstants.emailField: email,
+        AppConstants.userNameField: userName,
+        AppConstants.firstNameField: firstName,
+        AppConstants.lastNameField: lastName,
       };
 }

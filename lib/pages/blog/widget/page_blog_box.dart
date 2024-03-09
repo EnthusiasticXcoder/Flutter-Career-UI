@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercareerui/bloc/bloc.dart';
+import 'package:fluttercareerui/constants/constants.dart';
 import 'package:fluttercareerui/models/blog_model.dart';
 
 class PageBlocBox extends StatelessWidget {
@@ -49,7 +50,7 @@ class PageBlocBox extends StatelessWidget {
                           BlogEventCatagoryBlogList(item.catagoryLink),
                         );
                   },
-                  child: const Text('View All')),
+                  child: const Text(AppLanguage.viewAll)),
             ),
             InkWell(
               onTap: () {
@@ -90,7 +91,7 @@ class PageBlocBox extends StatelessWidget {
                               fontWeight: FontWeight.normal),
                         ),
                         TextSpan(
-                          text: '  Read More',
+                          text: AppLanguage.readMore,
                           style: TextStyle(
                             color: Colors.lightBlue.shade300,
                             fontSize: 12,

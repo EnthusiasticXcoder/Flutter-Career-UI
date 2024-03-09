@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttercareerui/bloc/bloc.dart';
+import 'package:fluttercareerui/constants/constants.dart';
 import 'package:fluttercareerui/pages/auth/widgets/widget.dart';
-
 
 class LogInView extends StatelessWidget {
   final args = {
-    'UserName': '',
-    'Password': '',
+    AppConstants.userNameField: '',
+    AppConstants.passwordField: '',
   };
   final _formKey = GlobalKey<FormState>();
   LogInView({super.key});
@@ -16,13 +16,13 @@ class LogInView extends StatelessWidget {
     bool obscureText = true;
     return PopScope(
       canPop: false,
-      onPopInvoked:(didPop) {
+      onPopInvoked: (didPop) {
         context.read<MainBloc>().add(
               const MainEventLogout(),
             );
       },
       child: PaintedScaffold(
-        title: 'Log In',
+        title: AppLanguage.logIn,
         onBack: () {
           context.read<MainBloc>().add(
                 const MainEventLogout(),
@@ -33,14 +33,14 @@ class LogInView extends StatelessWidget {
         bottom: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Don\'t Have an Account?'),
+            const Text(AppLanguage.dontHaveAaccount),
             TextButton(
                 onPressed: () {
                   context.read<MainBloc>().add(
                         const MainEventRegister(),
                       );
                 },
-                child: const Text('Register Here'))
+                child: const Text(AppLanguage.registerHere))
           ],
         ),
         // Main Entry Box
@@ -53,21 +53,21 @@ class LogInView extends StatelessWidget {
               // Name or Email Input Field
               TextInputField(
                 onChange: (value) {
-                  args.update('UserName', (old) => value!);
+                  args.update(AppConstants.userNameField, (old) => value!);
                 },
-                label: 'UserName',
+                label: AppLanguage.userName,
                 prefixIcon: Icons.email,
               ),
 
               // Password Input Field
               StatefulBuilder(
                 builder: (context, setState) => TextInputField(
-                  label: 'Password',
+                  label: AppLanguage.password,
                   prefixIcon: Icons.key,
                   suffixIcon: Icons.remove_red_eye,
                   obscureText: obscureText,
                   onChange: (value) {
-                    args.update('Password', (old) => value!);
+                    args.update(AppConstants.passwordField, (old) => value!);
                   },
                   showPassword: () {
                     setState(() {
@@ -83,7 +83,7 @@ class LogInView extends StatelessWidget {
                   //       const MainEventForgotPassword(),
                   //     );
                 },
-                child: const Text('Forgot Password?'),
+                child: const Text(AppLanguage.forgotPassword),
               ),
 
               // margin
@@ -92,8 +92,8 @@ class LogInView extends StatelessWidget {
               ForwardLabelButton(
                 onPress: () {
                   if (_formKey.currentState!.validate()) {
-                    final username = args['UserName'];
-                    final password = args['Password'];
+                    final username = args[AppConstants.userNameField];
+                    final password = args[AppConstants.passwordField];
                     context.read<MainBloc>().add(
                           MainEventLogin(
                             username: username,
@@ -102,7 +102,7 @@ class LogInView extends StatelessWidget {
                         );
                   }
                 },
-                label: 'Log In',
+                label: AppLanguage.logIn,
               ),
             ],
           ),

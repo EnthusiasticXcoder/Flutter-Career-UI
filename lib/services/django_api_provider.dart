@@ -3,11 +3,9 @@ import 'dart:convert';
 import 'package:fluttercareerui/constants/constants.dart';
 import 'package:fluttercareerui/models/models.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'api_exceptions.dart';
 import 'api_provider.dart';
-
 
 class DjangoAPIDataProvider implements APIDataProvider {
   APIUser? _user;
@@ -24,12 +22,13 @@ class DjangoAPIDataProvider implements APIDataProvider {
   @override
   Future<void> deleteUser() async {
     try {
-      final header = {'Authorization': 'token ${_user?.token}'};
-      final url = Uri.http(baseURL, userPath);
+      final header = {
+        AppConstants.authorization:
+            AppConstants.getAuthorizationValue(currentuser?.token)
+      };
+      final url = Uri.http(AppConstants.baseURL, AppConstants.userPath);
       final response = await _client.delete(url, headers: header);
-
-      final preference = await SharedPreferences.getInstance();
-      await preference.remove('token');
+      await AppMethods.deleteToken();
       _user = null;
       if (response.statusCode != 200) {
         throw UnableToDeleteUserAPIException();
@@ -42,11 +41,12 @@ class DjangoAPIDataProvider implements APIDataProvider {
   @override
   Future<Iterable<ContantItem>> getBlogcontant(String? url) async {
     try {
-      final urlpath = Uri.http(baseURL, blogContantPath);
+      final urlpath =
+          Uri.http(AppConstants.baseURL, AppConstants.blogContantPath);
 
-      final response = await _client.post(urlpath, body: {'url': url});
-      final List jsondata = jsonDecode(response.body);
-      return jsondata.map((item) => ContantItem.fromMap(item));
+      final response =
+          await _client.post(urlpath, body: {AppConstants.url: url});
+      return AppMethods.transformJsonToContentItem(response.body);
     } on Exception {
       throw GenericAPICallException();
     }
@@ -55,14 +55,10 @@ class DjangoAPIDataProvider implements APIDataProvider {
   @override
   Future<BlogList> getBloglist(String? url) async {
     try {
-      final urlpath = Uri.http(
-        baseURL,
-        bloglistPath,
-      );
-      final response = await _client.post(urlpath, body: {'url': url});
-      final jsondata = jsonDecode(response.body);
-
-      return BlogList.fromMap(jsondata);
+      final urlpath = Uri.http(AppConstants.baseURL, AppConstants.bloglistPath);
+      final response =
+          await _client.post(urlpath, body: {AppConstants.url: url});
+      return AppMethods.transformJsonToBlogList(response.body);
     } on Exception {
       throw GenericAPICallException();
     }
@@ -70,24 +66,17 @@ class DjangoAPIDataProvider implements APIDataProvider {
 
   @override
   Future<Iterable<BlogList>> getHomeBlog() async {
-    final url = Uri.http(
-      baseURL,
-      bloglistPath,
-    );
+    final url = Uri.http(AppConstants.baseURL, AppConstants.bloglistPath);
     final response = await _client.get(url);
-    final List jsondata = jsonDecode(response.body);
-
-    return jsondata.map((item) => BlogList.fromMap(item));
+    return AppMethods.transformJsonToItrableBlogList(response.body);
   }
 
   @override
   Future<Iterable<MenuItem>> getCareerlist() async {
     try {
-      final url = Uri.http(baseURL, currierlistPath);
+      final url = Uri.http(AppConstants.baseURL, AppConstants.currierlistPath);
       final response = await _client.get(url);
-      final List jsondata = jsonDecode(response.body);
-
-      return jsondata.map<MenuItem>((item) => MenuItem.fromMap(item));
+      return AppMethods.transformJsonToItrableMenuItem(response.body);
     } on Exception {
       throw GenericAPICallException();
     }
@@ -96,17 +85,17 @@ class DjangoAPIDataProvider implements APIDataProvider {
   @override
   Future<void> initialise() async {
     try {
-      final preference = await SharedPreferences.getInstance();
-      final token = preference.getString('token');
+      final token = await AppMethods.getToken();
       if (token != null) {
-        final header = {'Authorization': 'token $token'};
+        final header = {
+          AppConstants.authorization: AppConstants.getAuthorizationValue(token)
+        };
 
-        final url = Uri.http(baseURL, userPath);
+        final url = Uri.http(AppConstants.baseURL, AppConstants.userPath);
         final response = await _client.get(url, headers: header);
 
         if (response.statusCode == 200) {
-          final jsondata = jsonDecode(response.body);
-          _user = APIUser.fromjson(jsondata, token);
+          _user = AppMethods.transformJsonToAPIUser(response.body, token);
         }
       }
     } on Exception {
@@ -119,17 +108,16 @@ class DjangoAPIDataProvider implements APIDataProvider {
       {required String userName, required String password}) async {
     try {
       final body = {
-        userNameField: userName,
-        passwordField: password,
+        AppConstants.userNameField: userName,
+        AppConstants.passwordField: password,
       };
-      final url = Uri.http(baseURL, loginPath);
+      final url = Uri.http(AppConstants.baseURL, AppConstants.loginPath);
       final response = await _client.post(url, body: body);
       if (response.statusCode == 200) {
         final jsondata = jsonDecode(response.body);
-        _user = APIUser.fromjson(jsondata[payloadField], jsondata[tokenfield]);
-
-        final preference = await SharedPreferences.getInstance();
-        await preference.setString('token', jsondata[tokenfield]);
+        _user = APIUser.fromjson(jsondata[AppConstants.payloadField],
+            jsondata[AppConstants.tokenfield]);
+        await AppMethods.setToken(jsondata);
         return _user;
       } else if (response.statusCode == 404) {
         throw InvalidCredentialsAPIException();
@@ -144,14 +132,13 @@ class DjangoAPIDataProvider implements APIDataProvider {
   @override
   Future<APIUser?> register(Map<String, Object?> body) async {
     try {
-      final url = Uri.http(baseURL, registerPath);
+      final url = Uri.http(AppConstants.baseURL, AppConstants.registerPath);
       final response = await _client.post(url, body: body);
       if (response.statusCode == 200) {
         final jsonbody = jsonDecode(response.body);
-        _user = APIUser.fromjson(jsonbody[payloadField], jsonbody[tokenfield]);
-
-        final preference = await SharedPreferences.getInstance();
-        await preference.setString('token', jsonbody[tokenfield]);
+        _user = APIUser.fromjson(jsonbody[AppConstants.payloadField],
+            jsonbody[AppConstants.tokenfield]);
+        await AppMethods.setToken(jsonbody);
         return _user;
       } else if (response.statusCode == 400) {
         throw UnableToRegesterUserAPIException();
@@ -166,10 +153,13 @@ class DjangoAPIDataProvider implements APIDataProvider {
   @override
   Future<void> updatePassword(String password) async {
     try {
-      final body = {passwordField: password};
-      final header = {'Authorization': 'token ${_user?.token}'};
+      final body = {AppConstants.passwordField: password};
+      final header = {
+        AppConstants.authorization:
+            AppConstants.getAuthorizationValue(currentuser?.token)
+      };
 
-      final url = Uri.http(baseURL, userPath);
+      final url = Uri.http(AppConstants.baseURL, AppConstants.userPath);
       final response = await _client.put(url, body: body, headers: header);
       if (response.statusCode != 200) {
         throw UnableToChangeUserAPIException();

@@ -9,9 +9,9 @@ class ContantItem {
   const ContantItem(this.tag, this.contant, this.link);
 
   ContantItem.fromMap(dynamic map)
-      : tag = map[tagField],
-        contant = map['content'],
-        link = map[linkField];
+      : tag = map[AppConstants.tagField],
+        contant = map[AppConstants.contentField],
+        link = map[AppConstants.linkField];
 }
 
 @immutable
@@ -27,12 +27,12 @@ class BlogItem {
       this.catagoryLink);
 
   BlogItem.fromMap(dynamic map)
-      : image = map['img'] as String,
-        catagory = map['catagory'] as String,
-        catagoryLink = map['catagorylink'] as String?,
-        title = map['title'] as String,
-        link = map[linkField] as String,
-        text = map['text'] as String;
+      : image = map[AppConstants.imgField] as String,
+        catagory = map[AppConstants.catagoryField] as String,
+        catagoryLink = map[AppConstants.catagoryLinkField] as String?,
+        title = map[AppConstants.title] as String,
+        link = map[AppConstants.linkField] as String,
+        text = map[AppConstants.text] as String;
 }
 
 @immutable
@@ -43,10 +43,11 @@ class BlogList {
   const BlogList(this.title, this.itemList);
 
   BlogList.fromMap(dynamic map)
-      : itemList = (map[contantField] != null)
-            ? map[contantField].map<BlogItem>((item) => BlogItem.fromMap(item))
+      : itemList = (map[AppConstants.contentField] != null)
+            ? map[AppConstants.contentField]
+                .map<BlogItem>((item) => BlogItem.fromMap(item))
             : [],
-        title = map['title'] as String;
+        title = map[AppConstants.title] as String;
 }
 
 @immutable
@@ -58,9 +59,10 @@ class MenuItem {
   const MenuItem({required this.text, this.blog, this.attributes});
 
   MenuItem.fromMap(dynamic map)
-      : text = map['text'],
-        attributes = (map['attlist'] != null)
-            ? map['attlist'].map<MenuItem>((item) => MenuItem.fromMap(item))
+      : text = map[AppConstants.text],
+        attributes = (map[AppConstants.attributeListField] != null)
+            ? map[AppConstants.attributeListField]
+                .map<MenuItem>((item) => MenuItem.fromMap(item))
             : null,
-        blog = map['blog'];
+        blog = map[AppConstants.blogField];
 }

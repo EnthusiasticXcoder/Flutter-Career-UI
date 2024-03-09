@@ -5,12 +5,12 @@ import 'package:fluttercareerui/pages/auth/widgets/widget.dart';
 
 class RegisterView extends StatelessWidget {
   final args = {
-    firstNameField: '',
-    lastNameField: '',
-    userNameField: '',
-    emailField: '',
-    passwordField: '',
-    'Confirm Password': '',
+    AppConstants.firstNameField: '',
+    AppConstants.lastNameField: '',
+    AppConstants.userNameField: '',
+    AppConstants.emailField: '',
+    AppConstants.passwordField: '',
+    AppConstants.confirmPassword: '',
   };
   final _formKey = GlobalKey<FormState>();
   RegisterView({super.key});
@@ -25,7 +25,7 @@ class RegisterView extends StatelessWidget {
             );
       },
       child: PaintedScaffold(
-          title: 'Register User',
+          title: AppLanguage.registerUser,
           onBack: () {
             context.read<MainBloc>().add(
                   const MainEventLogout(),
@@ -35,14 +35,14 @@ class RegisterView extends StatelessWidget {
           bottom: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Already Have an Account?'),
+              const Text(AppLanguage.alreadyHaveAaccount),
               TextButton(
                   onPressed: () {
                     context.read<MainBloc>().add(
                           const MainEventLogin(),
                         );
                   },
-                  child: const Text('Log In Here'))
+                  child: const Text(AppLanguage.loginInHere))
             ],
           ),
           child: Form(
@@ -58,9 +58,10 @@ class RegisterView extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.sizeOf(context).width * 0.37,
                       child: TextInputField(
-                        label: 'First Name',
+                        label: AppLanguage.firstName,
                         onChange: (value) {
-                          args.update(firstNameField, (old) => value!);
+                          args.update(
+                              AppConstants.firstNameField, (old) => value!);
                         },
                       ),
                     ),
@@ -68,9 +69,10 @@ class RegisterView extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.sizeOf(context).width * 0.37,
                       child: TextInputField(
-                        label: 'last Name',
+                        label: AppLanguage.lastName,
                         onChange: (value) {
-                          args.update(lastNameField, (old) => value!);
+                          args.update(
+                              AppConstants.lastNameField, (old) => value!);
                         },
                       ),
                     ),
@@ -78,37 +80,37 @@ class RegisterView extends StatelessWidget {
                 ),
                 // user Name field
                 TextInputField(
-                  label: 'UserName',
+                  label: AppLanguage.userName,
                   onChange: (value) {
-                    args.update(userNameField, (old) => value!);
+                    args.update(AppConstants.userNameField, (old) => value!);
                   },
                 ),
 
                 // Email Input Field
                 TextInputField(
                   onChange: (value) {
-                    args.update(emailField, (old) => value!);
+                    args.update(AppConstants.emailField, (old) => value!);
                   },
-                  label: 'Email',
+                  label: AppLanguage.email,
                   prefixIcon: Icons.email,
                 ),
 
                 // Password Input Field
                 TextInputField(
                   onChange: (value) {
-                    args.update(passwordField, (old) => value!);
+                    args.update(AppConstants.passwordField, (old) => value!);
                   },
                   obscureText: true,
-                  label: 'Password',
+                  label: AppLanguage.password,
                   prefixIcon: Icons.key,
                 ),
 
                 // Password Input Field
                 TextInputField(
                   obscureText: true,
-                  label: 'Confirm Password',
+                  label: AppLanguage.confirmPassword,
                   onChange: (value) {
-                    args.update('Confirm Password', (old) => value!);
+                    args.update(AppConstants.confirmPassword, (old) => value!);
                   },
                   prefixIcon: Icons.password,
                 ),
@@ -118,12 +120,12 @@ class RegisterView extends StatelessWidget {
                 // Sign in button
                 ForwardLabelButton(
                   onPress: () {
-                    final password = args[passwordField];
-                    final confirmPassword = args['Confirm Password'];
+                    final password = args[AppConstants.passwordField];
+                    final confirmPassword = args[AppConstants.confirmPassword];
 
                     if (_formKey.currentState!.validate() &&
                         password == confirmPassword) {
-                      args.remove('Confirm Password');
+                      args.remove(AppConstants.confirmPassword);
                       context.read<MainBloc>().add(
                             MainEventRegister(
                               body: args,
@@ -131,7 +133,7 @@ class RegisterView extends StatelessWidget {
                           );
                     }
                   },
-                  label: 'Register',
+                  label: AppLanguage.register,
                 ),
               ],
             ),

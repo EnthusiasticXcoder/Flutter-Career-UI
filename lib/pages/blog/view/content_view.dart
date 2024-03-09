@@ -6,11 +6,8 @@ import 'package:fluttercareerui/models/blog_model.dart';
 import 'package:fluttercareerui/pages/blog/widget/widgets.dart';
 
 class BlogContantView extends StatelessWidget {
-  const BlogContantView({
-    super.key,
-    required this.contant,
-    required this.state,
-  });
+  const BlogContantView(
+      {super.key, required this.contant, required this.state});
 
   final Iterable<ContantItem> contant;
   final BlogState state;
@@ -38,7 +35,7 @@ class BlogContantView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: contant.map((item) {
                   switch (item.tag) {
-                    case 'img':
+                    case AppConstants.imgField:
                       return Container(
                         height: 200,
                         margin: const EdgeInsets.only(bottom: 22.0),
@@ -63,11 +60,11 @@ class BlogContantView extends StatelessWidget {
                           final String? link = item.link;
 
                           if (link != null && !link.startsWith('#')) {
-                            if (link.contains('category')) {
+                            if (link.contains(AppConstants.catagoryField)) {
                               context.read<BlogBloc>().add(
                                     BlogEventCatagoryBlogList(link),
                                   );
-                            } else if (link.contains('blog')) {
+                            } else if (link.contains(AppConstants.blogField)) {
                               context.read<BlogBloc>().add(
                                     BlogEventBlogContant(link),
                                   );
