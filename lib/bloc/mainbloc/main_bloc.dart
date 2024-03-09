@@ -22,7 +22,11 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       }
     });
 
-    on<MainEventLogout>((event, emit) {
+    on<MainEventLogout>((event, emit) async {
+      if (event.isLoggedIn) {
+        emit(const MainStateLoggedIn(isLoading: true));
+        await provider.logOut();
+      }
       emit(const MainStateLoggedOut(isLoading: false));
     });
 

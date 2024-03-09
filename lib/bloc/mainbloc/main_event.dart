@@ -10,7 +10,8 @@ class MainEventInitialise extends MainEvent {
 }
 
 class MainEventLogout extends MainEvent {
-  const MainEventLogout();
+  final bool isLoggedIn;
+  const MainEventLogout({this.isLoggedIn = false});
 }
 
 class MainEventRegister extends MainEvent {

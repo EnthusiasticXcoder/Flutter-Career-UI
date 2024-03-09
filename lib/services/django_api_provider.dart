@@ -168,4 +168,15 @@ class DjangoAPIDataProvider implements APIDataProvider {
       throw GenericAPICallException();
     }
   }
+
+  @override
+  Future<void> logOut() async {
+    try {
+      await AppMethods.deleteToken();
+      await AppMethods.getToken();
+      _user = null;
+    } on Exception {
+      throw GenericAPICallException();
+    }
+  }
 }

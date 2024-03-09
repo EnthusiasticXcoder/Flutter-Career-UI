@@ -27,12 +27,26 @@ class DrawerMenu extends StatelessWidget {
 
             // user tile
             ListTile(
+              contentPadding: const EdgeInsets.only(left: 16.0, right: 8.0),
+              minLeadingWidth: 0,
               textColor: Colors.blueGrey.shade200,
               leading: const CircleAvatar(child: Icon(Icons.person)),
               title: Text('${user?.firstName} ${user?.lastName}'),
               subtitle: Text(
                 '${user?.email}',
                 overflow: TextOverflow.ellipsis,
+              ),
+              trailing: IconButton(
+                onPressed: () {
+                  context.read<MainBloc>().add(
+                        const MainEventLogout(isLoggedIn: true),
+                      );
+                },
+                icon: const Icon(Icons.logout),
+                style: IconButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    backgroundColor: Colors.blueGrey,
+                    foregroundColor: Colors.blueGrey.shade200),
               ),
             ),
             const Divider(

@@ -5,7 +5,7 @@ abstract class APIDataProvider {
   Future<APIUser?> register(Map<String, Object?> body);
 
   Future<APIUser?> login({required String userName, required String password});
-
+  Future<void> logOut();
   Future<void> updatePassword(String password);
 
   Future<void> deleteUser();

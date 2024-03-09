@@ -42,4 +42,7 @@ class DjangoAPIservice implements APIDataProvider {
   @override
   Future<void> updatePassword(String password) =>
       provider.updatePassword(password);
+
+  @override
+  Future<void> logOut() => provider.logOut();
 }
