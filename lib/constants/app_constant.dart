@@ -1,6 +1,8 @@
+import 'package:fluttercareerui/secret_keys.dart';
+
 class AppConstants {
   /// URL Paths of the API Endpoints
-  static const baseURL = '';
+  static const baseURL = domainURL;
   static const registerPath = 'user/register';
   static const loginPath = 'user/login';
   static const userPath = 'user';
