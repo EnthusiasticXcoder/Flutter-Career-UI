@@ -42,11 +42,11 @@ class MainBloc extends Bloc<MainEvent, MainState> {
           );
           emit(const MainStateLoggedIn(isLoading: false));
         } on InvalidCredentialsAPIException {
-          emit(state);
+          emit(const MainStateLogIn(isLoading: false));
         } on UnableToLoginUserAPIException {
-          emit(state);
+          emit(const MainStateLogIn(isLoading: false));
         } on GenericAPICallException {
-          emit(state);
+          emit(const MainStateLogIn(isLoading: false));
         }
       }
     });

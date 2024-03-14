@@ -1,8 +1,6 @@
-import 'package:fluttercareerui/secret_keys.dart';
-
 class AppConstants {
   /// URL Paths of the API Endpoints
-  static const baseURL = domainURL;
+  static const baseURL = 'django-carrier-api.vercel.app';
   static const registerPath = 'user/register';
   static const loginPath = 'user/login';
   static const userPath = 'user';

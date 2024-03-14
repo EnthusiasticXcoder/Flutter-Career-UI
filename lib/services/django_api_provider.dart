@@ -26,7 +26,7 @@ class DjangoAPIDataProvider implements APIDataProvider {
         AppConstants.authorization:
             AppConstants.getAuthorizationValue(currentuser?.token)
       };
-      final url = Uri.http(AppConstants.baseURL, AppConstants.userPath);
+      final url = Uri.https(AppConstants.baseURL, AppConstants.userPath);
       final response = await _client.delete(url, headers: header);
       await AppMethods.deleteToken();
       _user = null;
@@ -42,7 +42,7 @@ class DjangoAPIDataProvider implements APIDataProvider {
   Future<Iterable<ContantItem>> getBlogcontant(String? url) async {
     try {
       final urlpath =
-          Uri.http(AppConstants.baseURL, AppConstants.blogContantPath);
+          Uri.https(AppConstants.baseURL, AppConstants.blogContantPath);
 
       final response =
           await _client.post(urlpath, body: {AppConstants.url: url});
@@ -55,7 +55,7 @@ class DjangoAPIDataProvider implements APIDataProvider {
   @override
   Future<BlogList> getBloglist(String? url) async {
     try {
-      final urlpath = Uri.http(AppConstants.baseURL, AppConstants.bloglistPath);
+      final urlpath = Uri.https(AppConstants.baseURL, AppConstants.bloglistPath);
       final response =
           await _client.post(urlpath, body: {AppConstants.url: url});
       return AppMethods.transformJsonToBlogList(response.body);
@@ -66,7 +66,7 @@ class DjangoAPIDataProvider implements APIDataProvider {
 
   @override
   Future<Iterable<BlogList>> getHomeBlog() async {
-    final url = Uri.http(AppConstants.baseURL, AppConstants.bloglistPath);
+    final url = Uri.https(AppConstants.baseURL, AppConstants.bloglistPath);
     final response = await _client.get(url);
     return AppMethods.transformJsonToItrableBlogList(response.body);
   }
@@ -74,7 +74,7 @@ class DjangoAPIDataProvider implements APIDataProvider {
   @override
   Future<Iterable<MenuItem>> getCareerlist() async {
     try {
-      final url = Uri.http(AppConstants.baseURL, AppConstants.currierlistPath);
+      final url = Uri.https(AppConstants.baseURL, AppConstants.currierlistPath);
       final response = await _client.get(url);
       return AppMethods.transformJsonToItrableMenuItem(response.body);
     } on Exception {
@@ -91,7 +91,7 @@ class DjangoAPIDataProvider implements APIDataProvider {
           AppConstants.authorization: AppConstants.getAuthorizationValue(token)
         };
 
-        final url = Uri.http(AppConstants.baseURL, AppConstants.userPath);
+        final url = Uri.https(AppConstants.baseURL, AppConstants.userPath);
         final response = await _client.get(url, headers: header);
 
         if (response.statusCode == 200) {
@@ -111,7 +111,7 @@ class DjangoAPIDataProvider implements APIDataProvider {
         AppConstants.userNameField: userName,
         AppConstants.passwordField: password,
       };
-      final url = Uri.http(AppConstants.baseURL, AppConstants.loginPath);
+      final url = Uri.https(AppConstants.baseURL, AppConstants.loginPath);
       final response = await _client.post(url, body: body);
       if (response.statusCode == 200) {
         final jsondata = jsonDecode(response.body);
@@ -132,7 +132,7 @@ class DjangoAPIDataProvider implements APIDataProvider {
   @override
   Future<APIUser?> register(Map<String, Object?> body) async {
     try {
-      final url = Uri.http(AppConstants.baseURL, AppConstants.registerPath);
+      final url = Uri.https(AppConstants.baseURL, AppConstants.registerPath);
       final response = await _client.post(url, body: body);
       if (response.statusCode == 200) {
         final jsonbody = jsonDecode(response.body);
@@ -159,7 +159,7 @@ class DjangoAPIDataProvider implements APIDataProvider {
             AppConstants.getAuthorizationValue(currentuser?.token)
       };
 
-      final url = Uri.http(AppConstants.baseURL, AppConstants.userPath);
+      final url = Uri.https(AppConstants.baseURL, AppConstants.userPath);
       final response = await _client.put(url, body: body, headers: header);
       if (response.statusCode != 200) {
         throw UnableToChangeUserAPIException();
