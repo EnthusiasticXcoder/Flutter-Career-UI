@@ -42,10 +42,14 @@ Flutter Career UI is a cross-platform application designed for Android and iOS t
 <p float="left">
    <img src="example_images/Example_1.jpg" width="260" /> 
    <img src="example_images/Example_5.jpg" width="260" /> 
-   <img src="example_images/Example_2.jpg" width="260" /> 
 </p>
 
 ---
+
+<p float="left">
+   <img src="example_images/Example_2.jpg" width="260" /> 
+   <img src="example_images/Example_10.jpg" width="260" /> 
+</p>
 
 ## Installation
 1. Ensure you have Flutter SDK installed on your system. If not, follow the official Flutter installation guide: [Flutter Installation Guide](https://flutter.dev/docs/get-started/install)
