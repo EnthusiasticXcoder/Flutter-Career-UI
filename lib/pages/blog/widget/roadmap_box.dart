@@ -13,6 +13,9 @@ class RoadmapBoxWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white70,
         borderRadius: BorderRadius.circular(12),
+        image: const DecorationImage(
+            fit: BoxFit.fitWidth,
+            image: AssetImage('assets/images/roadmap.jpg')),
         boxShadow: const <BoxShadow>[
           BoxShadow(
             color: Colors.black12,
@@ -28,52 +31,45 @@ class RoadmapBoxWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: Stack(
-        children: [
-          ClipRRect(
-              borderRadius: BorderRadius.circular(12.0),
-              child: const WebViewDisplay()),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12.0),
-            child: InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const WebViewDisplay(),
-                    ),
-                  );
-                },
-                child: Column(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(8.0),
-                      alignment: Alignment.bottomLeft,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Colors.black12,
-                            spreadRadius: -1.0,
-                            blurRadius: 2.0,
-                            offset: Offset(0.0, 0.0),
-                          ),
-                          BoxShadow(
-                            color: Colors.black12,
-                            spreadRadius: -1.0,
-                            blurRadius: 6.0,
-                            offset: Offset(-1.0, -1.0),
-                          ),
-                        ],
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12.0),
+        child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const WebViewDisplay(),
+                ),
+              );
+            },
+            child: Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(8.0),
+                  alignment: Alignment.bottomLeft,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: Colors.black12,
+                        spreadRadius: -1.0,
+                        blurRadius: 2.0,
+                        offset: Offset(0.0, 0.0),
                       ),
-                      child: const Text(AppLanguage.softwareRoadmap,
-                          style: TextStyle(fontSize: 22)),
-                    ),
-                    Container(margin: const EdgeInsets.all(4.0)),
-                  ],
-                )),
-          ),
-        ],
+                      BoxShadow(
+                        color: Colors.black12,
+                        spreadRadius: -1.0,
+                        blurRadius: 6.0,
+                        offset: Offset(-1.0, -1.0),
+                      ),
+                    ],
+                  ),
+                  child: const Text(AppLanguage.softwareRoadmap,
+                      style: TextStyle(fontSize: 22)),
+                ),
+                Container(margin: const EdgeInsets.all(4.0)),
+              ],
+            )),
       ),
     );
   }
