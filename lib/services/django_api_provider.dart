@@ -106,7 +106,6 @@ class DjangoAPIDataProvider implements APIDataProvider {
   @override
   Future<APIUser?> login(
       {required String userName, required String password}) async {
-    try {
       final body = {
         AppConstants.userNameField: userName,
         AppConstants.passwordField: password,
@@ -123,9 +122,6 @@ class DjangoAPIDataProvider implements APIDataProvider {
         throw InvalidCredentialsAPIException();
       } else {
         throw UnableToLoginUserAPIException();
-      }
-    } on Exception {
-      throw GenericAPICallException();
     }
   }
 

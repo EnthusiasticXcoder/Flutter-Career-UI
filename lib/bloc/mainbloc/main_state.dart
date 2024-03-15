@@ -3,7 +3,8 @@ import 'package:flutter/material.dart' show immutable;
 @immutable
 abstract class MainState {
   final bool isLoading;
-  const MainState({required this.isLoading});
+  final String? message;
+  const MainState({required this.isLoading, this.message});
 }
 
 class MainStateUninitialised extends MainState {
@@ -15,7 +16,7 @@ class MainStateLoggedOut extends MainState {
 }
 
 class MainStateLogIn extends MainState {
-  const MainStateLogIn({required super.isLoading});
+  const MainStateLogIn({required super.isLoading, super.message});
 }
 
 class MainStateRegister extends MainState {

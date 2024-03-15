@@ -23,6 +23,10 @@ class HomePage extends StatelessWidget {
         } else {
           LoadingScreen.hideLoadingScreen(context);
         }
+        if (state.message != null) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(state.message ?? 'Error')));
+        }
       },
       builder: (context, state) {
         switch (state.runtimeType) {
