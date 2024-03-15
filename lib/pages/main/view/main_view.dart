@@ -74,7 +74,10 @@ class _MainViewState extends State<MainView>
                     state: state.state,
                   );
                 } else if (state is BlogStateInitial) {
-                  return HomeView(bloglist: state.bloglist);
+                  return HomeView(
+                    bloglist: state.bloglist,
+                    careerList: state.carrierlist,
+                  );
                 } else {
                   return Scaffold(
                     body: CustomPaint(

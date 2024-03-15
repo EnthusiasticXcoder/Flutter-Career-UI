@@ -10,6 +10,8 @@ class AppConstants {
 
   static const roadmapPath = 'https://roadmap.sh';
   static const youtubePath = 'https://www.youtube.com/';
+  static const chatBotImageURL =
+      'https://media.istockphoto.com/id/1073043572/vector/robot-icon-bot-sign-design-chatbot-symbol-concept-voice-support-service-bot-online-support.jpg?s=612x612&w=0&k=20&c=IpqF1oBpILXVKmCPj63IftCxgDzNcTe7bvWnd-wSapw=';
 
   static const payloadField = 'payload';
   static const tokenfield = 'token';
@@ -32,8 +34,7 @@ class AppConstants {
   static const blogField = 'blog';
   static const attributeListField = 'attlist';
   static const url = 'url';
-
   static const appFont = 'Sen';
-
+  static const career = 'Careers';
   static String getAuthorizationValue(String? token) => 'token $token';
 }

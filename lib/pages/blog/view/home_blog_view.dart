@@ -3,18 +3,33 @@ import 'package:fluttercareerui/constants/constants.dart';
 import 'package:fluttercareerui/helpers/shaders/gradient_shader.dart';
 import 'package:fluttercareerui/models/blog_model.dart';
 import 'package:fluttercareerui/pages/blog/widget/widgets.dart';
+import 'package:fluttercareerui/pages/chat/view/view.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key, required this.bloglist});
+  const HomeView({super.key, required this.bloglist, this.careerList});
 
   final Iterable<BlogList>? bloglist;
+  final Iterable<MenuItem>? careerList;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size(0, 50),
-        child: Container(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChatBot(careerList: careerList),
+                ));
+              },
+              icon: const Icon(
+                Icons.chat_rounded,
+                color: Colors.white,
+                size: 35,
+              )),
+          const SizedBox(width: 10),
+        ],
       ),
       body: CustomPaint(
         painter: GradientPainter(),

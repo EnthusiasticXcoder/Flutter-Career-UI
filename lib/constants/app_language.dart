@@ -22,4 +22,7 @@ class AppLanguage {
   static const String registerHere = 'Register Here';
   static const String forgotPassword = 'Forgot Password?';
   static const String softwareRoadmap = 'Software Development Roadmaps';
+  static const String careerBot = 'Career Bot';
+  static const String botDescription = 'A ChatBot For Career Guidence';
+  static const askAboutCareer = 'Ask about career...';
 }

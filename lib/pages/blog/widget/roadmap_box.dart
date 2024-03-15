@@ -37,9 +37,11 @@ class RoadmapBoxWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(12.0),
             child: InkWell(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const WebViewDisplay(),
-                  ));
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const WebViewDisplay(),
+                    ),
+                  );
                 },
                 child: Column(
                   children: [
