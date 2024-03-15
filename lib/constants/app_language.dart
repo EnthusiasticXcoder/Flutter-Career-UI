@@ -21,4 +21,5 @@ class AppLanguage {
   static const String dontHaveAaccount = 'Don\'t Have an Account?';
   static const String registerHere = 'Register Here';
   static const String forgotPassword = 'Forgot Password?';
+  static const String softwareRoadmap = 'Software Development Roadmaps';
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttercareerui/constants/constants.dart';
 import 'package:fluttercareerui/helpers/shaders/gradient_shader.dart';
 import 'package:fluttercareerui/models/blog_model.dart';
-import 'package:fluttercareerui/pages/blog/widget/page_blog_box.dart';
+import 'package:fluttercareerui/pages/blog/widget/widgets.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key, required this.bloglist});
@@ -29,7 +29,7 @@ class HomeView extends StatelessWidget {
                 color: Colors.blueGrey.shade700,
               ),
             ),
-            const SizedBox(height: 20),
+            const RoadmapBoxWidget()
           ]
               .followedBy(
                 bloglist?.map(

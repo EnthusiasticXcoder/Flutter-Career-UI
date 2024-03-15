@@ -8,6 +8,9 @@ class AppConstants {
   static const bloglistPath = 'blog/list';
   static const blogContantPath = 'blog/content';
 
+  static const roadmapPath = 'https://roadmap.sh';
+  static const youtubePath = 'https://www.youtube.com/';
+
   static const payloadField = 'payload';
   static const tokenfield = 'token';
   static const firstNameField = 'first_name';
